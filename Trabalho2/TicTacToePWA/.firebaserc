@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tictactowpwaangular01": {
+      "hosting": {
+        "TicTacToePWA": [
+          "tictactowpwaangular01"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tictactowpwaangular01"
+  }
+}

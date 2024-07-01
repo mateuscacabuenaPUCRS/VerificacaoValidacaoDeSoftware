@@ -1,0 +1,115 @@
+<div class="wrapper">
+  <div class="header">
+    <h1 *ngIf="!started">
+      VS:
+      <button
+        data-cy="versus-button"
+        (click)="changePlayerCount()"
+        mat-raised-button
+        color="accnt"
+      >
+        {{ playerCount == 1 ? "Computer" : "Friend" }}
+      </button>
+    </h1>
+    <h1 *ngIf="started">
+      Current Player: <span>{{ player }}</span>
+    </h1>
+
+    <button data-cy="new-game-button" (click)="newGame()" mat-stroked-button color="warn">
+      Start new Game
+    </button>
+
+    <h2 data-cy="win-description" *ngIf="winner">Player {{ winner }} won the game!</h2>
+  </div>
+
+  <main>
+    <app-square
+      *ngFor="let square of squares; let i = index"
+      [value]="square"
+      [index]="i + 1"
+      (click)="makeMove(i)"
+    >
+    </app-square>
+  </main>
+
+  <div class="output">
+    <h2>Game Output</h2>
+    <div class="outputs" *ngIf="totalPredictions > 0">
+      <h3>
+        Correct Output: <span>{{ correctOutput }}</span>
+      </h3>
+      <h4>
+        Average Accuracy:
+        <span
+          data-cy="average-accuracy"
+          class="accuracy"
+          [attr.data-accuracy]="
+            correctHitsPercentage > 70
+              ? 'good'
+              : correctHitsPercentage < 40
+              ? 'bad'
+              : 'average'
+          "
+          >{{ correctHitsPercentage }}%</span
+        >
+      </h4>
+
+      <h3>
+        kNN Output: <span>{{ knnOutput }}</span>
+      </h3>
+      <h4>
+        Accuracy:
+        <span
+          data-cy="knn-accuracy"
+          class="accuracy"
+          [attr.data-accuracy]="
+            knnHitsPercentage > 70
+              ? 'good'
+              : knnHitsPercentage < 40
+              ? 'bad'
+              : 'average'
+          "
+          >{{ knnHitsPercentage }}%</span
+        >
+      </h4>
+
+      <h3>
+        MLP Output: <span>{{ mlpOutput }}</span>
+      </h3>
+      <h4>
+        Accuracy:
+        <span
+          data-cy="mlp-accuracy"
+          class="accuracy"
+          [attr.data-accuracy]="
+            mlpHitsPercentage > 70
+              ? 'good'
+              : mlpHitsPercentage < 40
+              ? 'bad'
+              : 'average'
+          "
+          >{{ mlpHitsPercentage }}%</span
+        >
+      </h4>
+
+      <h3>
+        Decision Tree Output: <span>{{ decisionTreeOutput }}</span>
+      </h3>
+      <h4>
+        Accuracy:
+        <span
+          class="accuracy"
+          [attr.data-accuracy]="
+            decisionTreeHitsPercentage > 70
+              ? 'good'
+              : decisionTreeHitsPercentage < 40
+              ? 'bad'
+              : 'average'
+          "
+          >{{ decisionTreeHitsPercentage }}%</span
+        >
+      </h4>
+    </div>
+    <p *ngIf="apiError" class="apiError">Unexpected Error: {{ apiError }}</p>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Debug: FastAPI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": ["main:app", "--reload"],
+            "jinja": true
+        },
+        {
+            "name": "Debug: Test",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "test_integration.py",
+            "console": "integratedTerminal"
+        },
+    ]
+}
